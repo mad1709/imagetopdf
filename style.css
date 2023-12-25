@@ -1,0 +1,221 @@
+
+@font-face {
+    font-family: 'Indie Flower';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/indieflower/v21/m8JVjfNVeKWVnh3QMuKkFcZVaUuH.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+#drop-zone {
+    margin-top: 20px;
+    background-color: none;
+    border: 2px dashed #00DDEB;
+    border-radius: 5px;
+    text-align: center;
+    padding: 50px;
+    margin: 30px 0;
+    cursor: pointer;
+    color:#f5f5f5;
+    font-size: 15px
+}
+.drag-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+    z-index: 1000; /* Đảm bảo lớp này nằm trên cùng */
+    visibility: hidden;
+}
+
+/* Màu cho trạng thái hợp lệ */
+.drag-overlay.valid {
+    position: fixed;
+    background-color: rgba(0, 128, 0, 0.5); /* Nền mờ xanh nhẹ */
+    color: white;
+}
+
+/* Màu cho trạng thái không hợp lệ */
+.drag-overlay.invalid {
+    position: fixed;
+    background-color: rgba(255, 0, 0, 0.5); /* Nền mờ đỏ nhẹ */
+    color: white;
+}
+
+
+body {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: monospace;
+    padding: 0px;
+}
+
+.header {
+    font-size: smaller;
+    margin: 0;
+    color: #fff; /* Màu chữ là màu trắng */
+    background-color: none;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 25px;
+}
+
+.header h1 {
+    margin: 20px 0 0;
+    font-weight: 900;
+    opacity: .9;
+    text-align: center; /* Đưa chữ ra giữa */
+    color: #fff; /* Màu chữ là màu trắng */
+    text-shadow: none; /* Loại bỏ đổ bóng chữ */
+    font-family: Lato,sans-serif;
+}
+
+.container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(29, 41, 82, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(247, 231, 231, 0.1);
+}
+
+h2 {
+    margin: 10px 0 0;
+    text-align: center;
+    color: #f71aad;
+    font-size: 25px;
+}
+
+input {
+    display: block;
+    margin: 20px 0;
+}
+
+.button-64 {
+    align-items: center;
+    background-image: linear-gradient(144deg, #ff00ac, #5B42F3 50%, #00DDEB);
+    border: 0;
+    border-radius: 4px; /* Đã chỉnh sửa */
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 15px; /* Bạn có thể chỉnh sửa nếu muốn nhỏ hơn */
+    padding: 5px; /* Đã chỉnh sửa */
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 100%; /* Đã chỉnh sửa từ 100% thành auto */
+  }
+  
+.button-64 .text {
+    background-color: rgb(5, 6, 45);
+    font-family: monospace;
+    color: white;
+    padding: 10px 16px; /* Đã chỉnh sửa */
+    border-radius: 5px; /* Đã chỉnh sửa */
+    width: 100%; /* Đã chỉnh sửa */
+    text-align: center;
+    transition: 300ms;
+  }
+  
+.button-64:hover .text {
+    background-image: linear-gradient(144deg, #ff00ac, #5B42F3 50%, #00DDEB);
+  }
+  
+.additional-converters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+
+#file-input-label {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#image-input {
+    display: none;
+}
+
+
+#file-list-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cột, mỗi cột có kích thước bằng nhau */
+    grid-gap: 10px; /* Khoảng cách giữa các item */
+    margin-top: 20px; /* Khoảng cách từ trên xuống */
+}
+
+.file-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-preview {
+    width: 100px; /* Cố định kích thước ảnh */
+    height: 100px; /* Cố định kích thước ảnh */
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    border: 1px solid #ccc; /* Viền cho ảnh */
+}
+
+.file-name {
+    color: #fff;
+    margin-top: 5px;
+    text-align: center; /* Căn giữa tên ảnh */
+    font-size: 12px; /* Chỉnh kích thước chữ nhỏ hơn */
+}
+
+.delete-button {
+    position: absolute;
+    top: 0;
+    right: 0; /* Chuyển từ left sang right */
+    background-color: rgb(224, 21, 21);
+    color: white;
+    cursor: pointer;
+    padding: 1px 4px;
+    font-size: 11px;
+    border-radius: 50%;
+    margin-top: -10px;
+    margin-right: -5px; /* Điều chỉnh lề bên phải */
+}
+
+.file-display {
+    position: relative;
+    /* các định dạng cũ */
+}
+
+.try-for-free-container {
+    position: relative; /* Sử dụng position relative để định vị các phần tử con */
+    text-align: center; /* Căn giữa nội dung */
+    color: #f71aad;
+    font-size: 28px;
+}
+
+.try-for-free-text {
+    position: absolute; /* Định vị tuyệt đối so với container */
+    top: 100px; /* Điều chỉnh vị trí theo nhu cầu */
+    left: 73%; /* Căn giữa so với container, sau đó dùng transform để căn giữa chính xác */
+    transform: translateX(-50%); /* Điều này sẽ căn giữa chữ so với container */
+    font-family: Indie Flower,cursive;
+}
+
+.arrow {
+    position: absolute; /* Định vị tuyệt đối so với container */
+    top: calc(100px + 25px); /* Đặt vị trí dưới chữ, 40px là khoảng cách giữa chữ và mũi tên */
+    left: calc(73% - 120px); /* Lệch sang trái so với vị trí căn giữa của chữ, điều chỉnh số 60px để lệch nhiều hơn hoặc ít hơn */
+    height: 90px; /* Kích thước của mũi tên */
+}

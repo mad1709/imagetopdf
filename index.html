@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Amaze Converter</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        #drop-zone a {
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>The fastest way to convert your file !</h1>
+    </div>
+    <!-- <div class="try-for-free-container">
+        <div class="try-for-free-text">Try for free</div>
+        <img class="arrow" src="arrow.png" alt="Mũi tên chỉ">
+    </div> -->
+    <div class="container">
+        <h2>Image to PDF</h2>
+        <div id="drop-zone" onclick="document.getElementById('image-input').click()">
+            Drag & drop your images or <a>click here</a>
+            <input type="file" id="image-input" accept="image/jpg, image/gif, image/tiff, image/psd, image/pdf, image/eps, image/png, image/heic, image/bmp" hidden multiple>
+        </div>        
+        <button id="convert-single-button"  class="button-64" role="button">
+            <span class="text">Convert to One PDF File</span>
+        </button>
+        <button id="convert-multiple-button"  class="button-64" role="button">
+            <span class="text">Convert to Individual PDF Files</span>
+        </button>
+        <div id="file-list-container"></div>
+    </div>
+
+    <div class="additional-converters">
+        <!-- Additional converter features -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
